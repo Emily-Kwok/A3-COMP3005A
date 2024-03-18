@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="656f2e94-862d-43cf-9ade-874cf64490b1" name="Changes" comment="Finished View All and Add Student functions. Has a menu and init function.">
+    <list default="true" id="656f2e94-862d-43cf-9ade-874cf64490b1" name="Changes" comment="Finished all">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
@@ -86,7 +86,14 @@
       <option name="project" value="LOCAL" />
       <updated>1710738569936</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Finished all">
+      <created>1710779214036</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1710779214036</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -94,6 +101,7 @@
     <MESSAGE value="to test re-commit; to see if it will update" />
     <MESSAGE value="Just deleted comment, nothing major changed in terms of code." />
     <MESSAGE value="Finished View All and Add Student functions. Has a menu and init function." />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished View All and Add Student functions. Has a menu and init function." />
+    <MESSAGE value="Finished all" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished all" />
   </component>
 </project>

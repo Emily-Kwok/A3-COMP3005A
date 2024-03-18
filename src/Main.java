@@ -10,6 +10,12 @@ import java.sql.SQLException;
 
 public class Main {
 
+    /*
+    * DESCRIPTION: Initializes the port, username, password, and
+    *              database (where the table is being stored/used).
+    * PARAMETERS: NONE
+    * RETURN: connection_metadata (String[])
+    * */
     static String[] init(){
         String[] connection_metadata = new String[3];
         String URL = "jdbc:postgresql://localhost:";
@@ -39,6 +45,13 @@ public class Main {
         return connection_metadata;
     }
 
+    /*
+     * DESCRIPTION: Prints out menu and action options including
+     *              'Get All Students', 'Add Student',
+     *              'Update Student Email', and 'Delete Student'.
+     * PARAMETERS: NONE
+     * RETURN: opt (int)
+     * */
     static int menu(){
         Scanner input = new Scanner(System.in);
         int opt = -1;
@@ -55,9 +68,9 @@ public class Main {
                 System.out.println("[0] Exit");
                 System.out.println("---------------------");
                 System.out.print(": ");
-                if(input.hasNextInt()) {
+                if(input.hasNextInt()) {            // checks if input is an integer
                     opt = input.nextInt();
-                    if( opt <= 4 && opt >= 0 ) flag = false;
+                    if( opt <= 4 && opt >= 0 ) flag = false;    // checks if input is within range
                     else System.out.println("\nERROR. '" + opt + "' is not an option. Please try again.");
                 }
                 else{
@@ -75,6 +88,11 @@ public class Main {
         return opt;
     }
 
+    /*
+     * DESCRIPTION: Prints out all students and metadata.
+     * PARAMETERS: c (Connection)
+     * RETURN: NONE
+     * */
     static void getAllStudents(Connection c){     // Retrieves and displays all records from the students table.
         String[] labels = {"ID", "First Name", "Last Name", "Email", "Enrollment Date"};
         String[] columns = {String.format("| %-3s |", labels[0]),
@@ -115,6 +133,12 @@ public class Main {
         }
     }
 
+    /*
+     * DESCRIPTION: Adds a student.
+     * PARAMETERS: fname (String), lname (String), email (String),
+     *             enrollment_date (Date), c (Connection)
+     * RETURN: true/false (boolean)
+     * */
     static boolean addStudent(String fname, String lname, String email, Date enrollment_date, Connection c){     // Inserts a new student record into the students table.
         try{
             Statement statement = c.createStatement();
@@ -134,6 +158,11 @@ public class Main {
         return false;
     }
 
+    /*
+     * DESCRIPTION: Updates the student's email.
+     * PARAMETERS: student_id (int), new_email (String), c (Connection)
+     * RETURN: true/false (boolean)
+     * */
     static boolean updateStudentEmail(int student_id, String new_email, Connection c){     // Updates the email address for a student with the specified student_id.
         try{
             Statement statement = c.createStatement();
@@ -154,6 +183,11 @@ public class Main {
         return false;
     }
 
+    /*
+     * DESCRIPTION: Deletes a student.
+     * PARAMETERS: student_id (int), c (Connection)
+     * RETURN: true/false (boolean)
+     * */
     static boolean deleteStudent(int student_id, Connection c){     // Deletes the record of the student with the specified student_id.
         try{
             Statement statement = c.createStatement();
@@ -195,10 +229,10 @@ public class Main {
                 Scanner input = new Scanner(System.in);
 
                 switch(opt) {
-                    case 1:
+                    case 1:                             // Prints all students
                         getAllStudents(connection);
                         break;
-                    case 2:
+                    case 2:                             // Adds student
                         System.out.println("NOTE: Enter date in YYYY-MM-DD format.\n");
 
                         System.out.print("Enter first name: ");
@@ -218,7 +252,7 @@ public class Main {
                             System.out.println("\nERROR. Student was NOT added.");
                         }
                         break;
-                    case 3:
+                    case 3:                             // Update a student's email by ID
                         flag = true;
                         while(flag){
                             System.out.print("Enter student ID: ");
@@ -244,7 +278,7 @@ public class Main {
                         }
 
                         break;
-                    case 4:
+                    case 4:                             // Deletes student by ID
                         flag = true;
                         while(flag){
                             System.out.print("Enter student ID: ");
@@ -265,7 +299,7 @@ public class Main {
                             System.out.println("\nERROR. Student was NOT added.");
                         }
                         break;
-                    default:
+                    default:                             // Exits program
                         System.out.println("\nGood Bye!");
                         System.exit(0);
                 }
