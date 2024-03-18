@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 
 public class Main {
+
     static String[] init(){
         String[] connection_metadata = new String[3];
         String URL = "jdbc:postgresql://localhost:";
@@ -57,10 +58,10 @@ public class Main {
                 if(input.hasNextInt()) {
                     opt = input.nextInt();
                     if( opt <= 4 && opt >= 0 ) flag = false;
-                    else System.out.println("\nERROR. Integer not found. Try again.");
+                    else System.out.println("\nERROR. '" + opt + "' is not an option. Please try again.");
                 }
                 else{
-                    System.out.println("\nERROR. Input is not an integer. Try again.");
+                    System.out.println("\nERROR. Input is not an integer. Please try again.");
                     input.next();
                 }
             }
@@ -123,42 +124,81 @@ public class Main {
             return true;
         }
         catch(SQLException s){
-            System.out.println("\nSQL ERROR occurred in getAllStudents().");
+            System.out.println("\nSQL ERROR occurred in addStudent().");
             s.printStackTrace();
         }
         catch(Exception e){
-            System.out.println("\nERROR occurred in getAllStudents().");
+            System.out.println("\nERROR occurred in addStudent().");
             e.printStackTrace();
         }
         return false;
     }
-    static boolean updateStudentEmail(int student_id, String new_email, Connection c){     // Updates the email address for a student with the specified student_id.
-        return false;
-    }
-    static boolean deleteStudent(int student_id, Connection c){     // Deletes the record of the student with the specified student_id.
-        return false;
-    }
-    public static void main(String[] args) {
-//        String[] connection_metadata = init();
-        String url = "jdbc:postgresql://localhost:5432/assignment3";
-        String user =  "postgres";
-        String password = "password";
 
+    static boolean updateStudentEmail(int student_id, String new_email, Connection c){     // Updates the email address for a student with the specified student_id.
         try{
-            Class.forName("org.postgresql.Driver");
-//            Connection connection = DriverManager.getConnection(connection_metadata[0], connection_metadata[1], connection_metadata[2]);
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Statement statement = c.createStatement();
+            statement.executeUpdate("UPDATE students " +
+                    "SET email = '" + new_email + "' " +
+                    "WHERE student_id = " + student_id + "");
+
+            return true;
+        }
+        catch(SQLException s){
+            System.out.println("\nSQL ERROR occurred in updateStudentEmail().");
+            s.printStackTrace();
+        }
+        catch(Exception e){
+            System.out.println("\nERROR occurred in updateStudentEmail().");
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    static boolean deleteStudent(int student_id, Connection c){     // Deletes the record of the student with the specified student_id.
+        try{
+            Statement statement = c.createStatement();
+            statement.executeUpdate("DELETE FROM students WHERE student_id = " + student_id + "");
+
+            return true;
+        }
+        catch(SQLException s){
+            System.out.println("\nSQL ERROR occurred in deleteStudent().");
+            s.printStackTrace();
+        }
+        catch(Exception e){
+            System.out.println("\nERROR occurred in deleteStudent().");
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        Connection connection;
+        try{
+            while(true){
+                try{
+                    String[] connection_metadata = init();
+                    Class.forName("org.postgresql.Driver");
+                    connection = DriverManager.getConnection(connection_metadata[0], connection_metadata[1], connection_metadata[2]);
+                    System.out.println("\nSUCCESS. Connected to database.");
+                    break;
+                }
+                catch(SQLException s){
+                    System.out.println("\nERROR. Connection to database failed. Please try again.\n");
+                }
+            }
 
             while(true){
                 int opt = menu();
+                int id = -1;
+                boolean flag = true;
+                Scanner input = new Scanner(System.in);
 
                 switch(opt) {
                     case 1:
                         getAllStudents(connection);
                         break;
                     case 2:
-                        Scanner input = new Scanner(System.in);
-
                         System.out.println("NOTE: Enter date in YYYY-MM-DD format.\n");
 
                         System.out.print("Enter first name: ");
@@ -175,31 +215,64 @@ public class Main {
                             System.out.println("SUCCESS! Student is added.");
                         }
                         else{
-                            System.out.println("ERROR. Student was NOT added.");
+                            System.out.println("\nERROR. Student was NOT added.");
                         }
                         break;
                     case 3:
-//                        updateStudentEmail(id, new_email, c);
+                        flag = true;
+                        while(flag){
+                            System.out.print("Enter student ID: ");
+                            if(input.hasNextInt()) {
+                                id = input.nextInt();
+                                flag = false;
+                            }
+                            else{
+                                System.out.println("\nERROR. Input is not an integer. Please try again.");
+                                input.next();
+                            }
+                        }
+
+                        input.nextLine();
+                        System.out.print("Enter new email: ");
+                        String new_email = input.nextLine();
+
+                        if(updateStudentEmail(id, new_email, connection)){
+                            System.out.println("SUCCESS! Student " + id + "'s email has been updated.");
+                        }
+                        else{
+                            System.out.println("\nERROR. Student was NOT added.");
+                        }
+
                         break;
                     case 4:
-//                        deleteStudent(id, c);
+                        flag = true;
+                        while(flag){
+                            System.out.print("Enter student ID: ");
+                            if(input.hasNextInt()) {
+                                id = input.nextInt();
+                                flag = false;
+                            }
+                            else{
+                                System.out.println("\nERROR. Input is not an integer. Please try again.");
+                                input.next();
+                            }
+                        }
+
+                        if(deleteStudent(id, connection)){
+                            System.out.println("SUCCESS! Student " + id + " has been deleted.");
+                        }
+                        else{
+                            System.out.println("\nERROR. Student was NOT added.");
+                        }
                         break;
                     default:
                         System.out.println("\nGood Bye!");
                         System.exit(0);
                 }
             }
-
-            // EXAMPLE - PLACEHOLDER
-//            Statement statement = connection.createStatement();
-//            statement.executeQuery("SELECT * FROM students");
-//            ResultSet resultSet = statement.getResultSet();
-//            while(resultSet.next()){
-//                System.out.println(resultSet.getString("first_name"));
-//            }
         }
         catch(Exception e){
-            System.out.println("ERROR occurred in main().");
+            System.out.println("\nERROR occurred in main().");
             e.printStackTrace();
         }
     }
