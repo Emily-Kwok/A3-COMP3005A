@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="656f2e94-862d-43cf-9ade-874cf64490b1" name="Changes" comment="Added comments and documentation">
+    <list default="true" id="656f2e94-862d-43cf-9ade-874cf64490b1" name="Changes" comment="Added SQL File with SQL folder">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +48,11 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ekwok\IdeaProjects\A3-COMP3005A\sql" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -100,7 +104,21 @@
       <option name="project" value="LOCAL" />
       <updated>1710780493702</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added comments and documentation">
+      <created>1710780519602</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1710780519602</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Added SQL File with SQL folder">
+      <created>1710780795462</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1710780795462</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -110,6 +128,7 @@
     <MESSAGE value="Finished View All and Add Student functions. Has a menu and init function." />
     <MESSAGE value="Finished all" />
     <MESSAGE value="Added comments and documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added comments and documentation" />
+    <MESSAGE value="Added SQL File with SQL folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added SQL File with SQL folder" />
   </component>
 </project>
